@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom'
 function EntryForm() {
   const [formData, setFormData] = useState({question: '', answer: ''})
 
+  console.log(import.meta.env.VITE_OPENAI_API_KEY)
+  // console.log(env.REACT_APP_OPENAI_API_KEY)
+
   function handleInput(e) {
     setFormData((prev) => {
       return {
