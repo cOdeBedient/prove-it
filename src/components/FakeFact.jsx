@@ -44,10 +44,8 @@ function FakeFact(props) {
   }
 
   useEffect(() => {
-    formData ? generateFact() : setAnswer('You have not submitted and answer. Here is the default answer to use for page styling.<br></br>Feel free to use this space to detirmine how things should be styled.<br></br>Because the landspeed of an African swallow is pretty darn slow! Or are they fast? I do not know much about biology, or I suppose ecology. Is studying birds a part of ecology? I know its ornithology, but I also think its part of ecology. Or at least a part of being a naturalist. Or at least a part of being an interesting person.')
+    formData ? generateFact() : setAnswer('You have not submitted and answer. Here is the default answer to use for page styling. Feel free to use this space to detirmine how things should be styled. Because the landspeed of an African swallow is pretty darn slow! Or are they fast? I do not know much about biology, or I suppose ecology. Is studying birds a part of ecology? I know its ornithology, but I also think its part of ecology. Or at least a part of being a naturalist. Or at least a part of being an interesting person.')
   }, [])
-
-
 
   return (
     <main className="w-full h-screen bg-gray-100">
@@ -60,8 +58,12 @@ function FakeFact(props) {
           <img src="/bell-logo.png" alt="bell logo" />
         </header> */}
         <div className="relative w-11/12 h-10 mt-3">
-          <input placeholder="This is where formData.question will go" className="shadow rounded-3xl w-full h-full pl-10"></input>
+          
+          <input placeholder="This is where formData.question will go" className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden"></input>
+          <div className="w-full h-10 absolute left-0 top-0 bg-gradient-to-l from-25% to-35% from-white"></div>
           <img className="absolute top-3 left-3 w-5 h-5 text-gray-500 opacity-60" src="/magnifying-glass.svg" alt="search icon" />
+          <img className="absolute top-1 right-12 w-8 h-10 text-gray-500 " src="/google-mic.svg" alt="microphone icon" />
+          <img className="absolute top-3 right-3 w-5 h-5 text-gray-500 " src="/google-lens.png" alt="camera icon" />
         </div>
         <section className="flex relative justify-between ml-8 w-full h-7 my-3 text-sm text-slate-500">
           <button className="before:w-full before:h-7 before:absolute before:left-0 before:top-0 before:bg-gradient-to-l before:from-1% before:to-15% before:from-white border-b-2 border-black text-black">All</button>
