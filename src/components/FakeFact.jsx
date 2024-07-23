@@ -5,6 +5,7 @@ import {getFact} from "../apiCalls"
 import '@material/web/button/outlined-button.js'
 import '@material/web/tabs/primary-tab.js'
 import '@material/web/elevation/elevation.js';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 function FakeFact(props) {
   const [answer, setAnswer] = useState("Here's the answer!")
@@ -58,9 +59,12 @@ function FakeFact(props) {
           <img src="/google-logo.png" alt="google logo" />
           <img src="/bell-logo.png" alt="bell logo" />
         </header> */}
-        <input className="shadow rounded-2xl w-11/12 h-10 mt-3"></input>
-        <section className="flex justify-evenly w-full h-7 my-3">
-          <button className="border-b-2 border-black">All</button>
+        <div className="relative w-11/12 h-10 mt-3">
+          <input placeholder="This is where formData.question will go" className="shadow rounded-3xl w-full h-full pl-10"></input>
+          <img className="absolute top-3 left-3 w-5 h-5 text-gray-500 opacity-60" src="/magnifying-glass.svg" alt="search icon" />
+        </div>
+        <section className="flex relative justify-between ml-8 w-full h-7 my-3 text-sm text-slate-500">
+          <button className="before:w-full before:h-7 before:absolute before:left-0 before:top-0 before:bg-gradient-to-l before:from-1% before:to-15% before:from-white border-b-2 border-black text-black">All</button>
           <button>Images</button>
           <button>News</button>
           <button>Videos</button>
@@ -68,20 +72,21 @@ function FakeFact(props) {
           <button>Forums</button>
         </section>
         <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12'>
-          <div className='flex'>
-            <img src="/ai-logo.png" alt="ai logo" />
-            <p>AI Overview</p>
+          <div className='flex items-center'>
+            <img className="w-5 h-5 mr-3" src="/ai-logo.png" alt="ai logo" />
+            <p className="text-sm">AI Overview</p>
           </div>
-          <div className='flex'>
-            <p>Learn more</p>
-            <img src="/three-dots.png" alt="three vertical dots" />
+          <div className='flex items-center'>
+            <p className="font-extralight text-sm mr-2">Learn more</p>
+            <img className="w-5 h-5" src="/three-dots.svg" alt="three vertical dots" />
           </div>
         </div>
-        <p className="w-11/12 overflow-hidden font-light">{answer}</p>
-        <div className="absolute bottom-4 w-full flex flex-col items-center">
+        <p className="w-11/12 h-64 overflow-hidden text-lg/6 font-light">{answer}</p>
+        <div className="absolute bottom-3 w-full flex flex-col items-center">
           <div className="w-full h-40 bg-gradient-to-t from-white to-white-200/25"></div>
-          <div className="bg-white h-12 w-full flex flex-col items-center">
-            <button className="bg-white border border-pink-400  h-12 w-11/12 rounded-3xl">Show More</button>
+          <div className="bg-white relative h-12 w-full flex flex-col items-center">
+            <button className="bg-white border border-pink-400 font-light text-sm h-12 w-11/12 rounded-3xl">Show More</button>
+            <img className="absolute top-5 right-28 mr-2 w-4 h-2 text-gray-500 opacity-60" src="/caret-down.png" alt="down caret" />
           </div>
         </div>
       </div>
