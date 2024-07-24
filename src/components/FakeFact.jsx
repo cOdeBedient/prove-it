@@ -6,12 +6,13 @@ import '@material/web/button/outlined-button.js'
 import '@material/web/tabs/primary-tab.js'
 import '@material/web/elevation/elevation.js';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import trainingDetails from "../trainingDetails"
 
 function FakeFact(props) {
-  const [answer, setAnswer] = useState("Here's the answer!")
+  const [answer, setAnswer] = useState("You have not submitted and answer. Here is the default answer to use for page styling. Feel free to use this space to detirmine how things should be styled. Because the landspeed of an African swallow is pretty darn slow! Or are they fast? I do not know much about biology, or I suppose ecology. Is studying birds a part of ecology? I know its ornithology, but I also think its part of ecology. Or at least a part of being a naturalist. Or at least a part of being an interesting person.")
   const location = useLocation()
   let formData
-  // formData = location ? location.state : null
+  formData = location ? location.state : null
 
   
 
@@ -23,10 +24,10 @@ function FakeFact(props) {
         messages: [
           {
             role: "system",
-            content: "you are a search engine that returns a two-sentence answer to a question using the fake fact provided by the user instead of the real fact"
+            content: trainingDetails
           },
           {
-            role: "user", content: `The question is ${formData.formData.question} and the fact is ${formData.formData.answer}`
+            role: "user", content: `The question is ${formData.formData.question} and the fake fact is ${formData.formData.answer}`
           }
         ]
       }
@@ -35,6 +36,7 @@ function FakeFact(props) {
       
       if(result) {
         const fact = result.choices[0].message.content
+        console.log('fact', fact)
         setAnswer(fact)
       }
     } catch (error) {
@@ -43,12 +45,13 @@ function FakeFact(props) {
     }
   }
 
-  useEffect(() => {
-    formData ? generateFact() : setAnswer('You have not submitted and answer. Here is the default answer to use for page styling. Feel free to use this space to detirmine how things should be styled. Because the landspeed of an African swallow is pretty darn slow! Or are they fast? I do not know much about biology, or I suppose ecology. Is studying birds a part of ecology? I know its ornithology, but I also think its part of ecology. Or at least a part of being a naturalist. Or at least a part of being an interesting person.')
-  }, [])
+  // useEffect(() => {
+  //   formData ? generateFact() : setAnswer('')
+  // }, [])
 
   return (
     <main className="w-full h-screen bg-gray-100">
+      <div className="h-6 w-6 bg-red-600 absolute z-10" onClick={() => generateFact()}></div>
       <div className="flex flex-col items-center h-2/3 mb-3 bg-white relative">
         {/* <header>
           <img src="/lines.png" alt="three horizontal lines" />
