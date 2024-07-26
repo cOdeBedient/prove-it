@@ -23,8 +23,8 @@ const getFact = async (data) => {
       return result
 
     } catch (error) {
-        console.error('Error calling OpenAI:', error);
-        return null;
+        // console.error('Error calling OpenAI:', error)
+        return error;
     }     
 }
 

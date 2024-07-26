@@ -13,7 +13,6 @@ function FakeFact(props) {
   formData = location ? location.state : null
 
   const generateFact = async () => {
-    console.log("formData", formData.formData)
     try {
       const data = {
         model: "gpt-3.5-turbo",
@@ -34,8 +33,8 @@ function FakeFact(props) {
         processFact(fact)
       }
     } catch (error) {
-      console.error('Error generating fact:', error)
-      setAnswer('Failed to generate fact.')
+      console.log('here, right?')
+      setAnswer({part1: ["Failed to generate fact. Please try again later and make sure you don't show your friend this screen!", "", ""], part2: []})
     }
   }
 
@@ -52,8 +51,8 @@ function FakeFact(props) {
 
   return (
     <Link to='/error'>
-      <main className="w-full h-screen bg-gray-100 flex flex-col items-center">
-        <div className="flex flex-col items-center h-[800px] mb-2 w-full bg-white relative">
+      <main className="w-full bg-gray-100 flex flex-col items-center">
+        <div className="flex flex-col items-center h-[480px] mb-2 w-full bg-white relative">
           <div className="relative w-11/12 h-10 mt-3">
             <input placeholder={formData.formData.question} className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden placeholder:text-black placeholder:text-sm placeholder:font-light"></input>
             <div className="w-full rounded-3xl h-10 absolute left-0 top-0 bg-gradient-to-l from-25% to-35% from-white"></div>
@@ -88,7 +87,8 @@ function FakeFact(props) {
             </div>
           </div>
         </div>
-        <section className="bg-white w-full overflow-hidden flex flex-col items-center">
+        {answer.related &&
+          <section className="bg-white w-full overflow-hidden flex flex-col items-center">
             <ul className="w-11/12">
               <div className="text-lg h-14 border-b bg-white flex items-center justify-between">
                 <h2>People also ask</h2>
@@ -112,6 +112,7 @@ function FakeFact(props) {
               </div>
             </ul>
         </section>
+      }
       </main>
     </Link>
   )
