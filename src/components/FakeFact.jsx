@@ -51,9 +51,9 @@ function FakeFact(props) {
     setAnswer({part1: answer1, related: relatedQuestions})
   }
 
-  // useEffect(() => {
-  //   formData && generateFact()
-  // }, [formData])
+  useEffect(() => {
+    formData && generateFact()
+  }, [formData])
 
   return (
     <main className="w-full h-screen bg-gray-100 flex flex-col items-center">
