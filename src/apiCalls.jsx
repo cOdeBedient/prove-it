@@ -20,7 +20,6 @@ const getFact = async (data) => {
       }
 
       const result = await response.json()
-
       return result
 
     } catch (error) {
