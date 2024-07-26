@@ -3,7 +3,7 @@ const getFact = async (data) => {
 
     try {
       const apiUrl = 'https://api.openai.com/v1/chat/completions'
-      const apiKey = import.meta.env.VITE_OPENAI_API_KEY
+      const apiKey = import.meta.env.OPENAI_API_KEY
       const headers = {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`
