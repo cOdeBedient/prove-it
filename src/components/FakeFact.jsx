@@ -2,19 +2,14 @@ import React from 'react'
 import {useState, useEffect} from 'react'
 import { useLocation } from 'react-router-dom'
 import {getFact} from "../apiCalls"
-import '@material/web/button/outlined-button.js'
-import '@material/web/tabs/primary-tab.js'
-import '@material/web/elevation/elevation.js';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import trainingDetails from "../trainingDetails"
 
 function FakeFact(props) {
   const [answer, setAnswer] = useState({part1: [], related: []})
+
   const location = useLocation()
   let formData
   formData = location ? location.state : null
-
-  
 
   const generateFact = async () => {
     console.log("formData", formData.formData)
@@ -33,7 +28,6 @@ function FakeFact(props) {
       }
 
       const result = await getFact(data)
-      
       if(result) {
         const fact = result.choices[0].message.content
         processFact(fact)
@@ -58,13 +52,6 @@ function FakeFact(props) {
   return (
     <main className="w-full h-screen bg-gray-100 flex flex-col items-center">
       <div className="flex flex-col items-center h-[800px] mb-2 bg-white relative">
-        {/* <header>
-          <img src="/lines.png" alt="three horizontal lines" />
-          <img src="/beaker.png" alt="beaker" />
-          <img src="/google-logo.png" alt="google logo" />
-          <img src="/google-logo.png" alt="google logo" />
-          <img src="/bell-logo.png" alt="bell logo" />
-        </header> */}
         <div className="relative w-11/12 h-10 mt-3">
           <input placeholder={formData.formData.question} className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden placeholder:text-black placeholder:text-sm placeholder:font-light"></input>
           <div className="w-full h-10 absolute left-0 top-0 bg-gradient-to-l from-25% to-35% from-white"></div>
@@ -122,25 +109,7 @@ function FakeFact(props) {
               <img className="w-8 h-8 py-3 px-2 bg-gray-200 opacity-60 saturate-0 rounded-full" src="/caret-down.png" alt="down caret" />
             </div>
           </ul>
-      
-      
-      
       </section>
-      {/* <div className="bg-white h-1/3 overflow-hidden w-full flex flex-col items-center">
-        <div className="bg-gray-100 rounded-xl w-11/12 mt-3">
-          <div className="w-full h-16 flex justify-between items-center">
-              <div className="flex items-center">
-                <p className="border h-6 w-7 ml-4 mr-3 rounded-full text-center">W</p>
-                <div>
-                  <p className="text-sm">Wikipedia</p>
-                  <p className="font-light text-xs">https://en.wikipedia.org</p>
-                </div>
-              </div>
-              <img className="w-5 h-5" src="/three-dots.svg" alt="three vertical dots" />
-          </div>
-          <div className=" px-5 overflow-hidden text-sm/5 font-light">{answer.part2}</div>
-        </div>
-      </div> */}
     </main>
   )
 }
