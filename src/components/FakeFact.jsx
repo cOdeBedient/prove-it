@@ -48,7 +48,6 @@ function FakeFact(props) {
     const splitFact = fact.split("RELATED: ")
     const answer1 = splitFact[0].split("FACT")
     const relatedQuestions = splitFact[1].split("QUESTION: ")
-
     setAnswer({part1: answer1, related: relatedQuestions})
   }
 
@@ -58,8 +57,7 @@ function FakeFact(props) {
 
   return (
     <main className="w-full h-screen bg-gray-100 flex flex-col items-center">
-      <div className="h-6 w-6 bg-red-600 absolute left-0 z-10" onClick={() => generateFact()}></div>
-      <div className="flex flex-col items-center h-2/3 mb-2 bg-white relative">
+      <div className="flex flex-col items-center h-[800px] mb-2 bg-white relative">
         {/* <header>
           <img src="/lines.png" alt="three horizontal lines" />
           <img src="/beaker.png" alt="beaker" />
@@ -68,7 +66,6 @@ function FakeFact(props) {
           <img src="/bell-logo.png" alt="bell logo" />
         </header> */}
         <div className="relative w-11/12 h-10 mt-3">
-          
           <input placeholder={formData.formData.question} className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden placeholder:text-black placeholder:text-sm placeholder:font-light"></input>
           <div className="w-full h-10 absolute left-0 top-0 bg-gradient-to-l from-25% to-35% from-white"></div>
           <img className="absolute top-3 left-3 w-5 h-5 text-gray-500 opacity-60" src="/magnifying-glass.svg" alt="search icon" />
@@ -102,7 +99,7 @@ function FakeFact(props) {
           </div>
         </div>
       </div>
-      <section className="h-1/3 bg-white w-full overflow-hidden flex flex-col items-center">
+      <section className="bg-white w-full overflow-hidden flex flex-col items-center">
           <ul className="w-11/12">
             <div className="text-lg h-14 border-b bg-white flex items-center justify-between">
               <h2>People also ask</h2>
