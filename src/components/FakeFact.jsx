@@ -4,9 +4,11 @@ import { useLocation } from 'react-router-dom'
 import {getFact} from "../apiCalls"
 import trainingDetails from "../trainingDetails"
 import {Link} from 'react-router-dom'
+import './Styles.css'
 
 function FakeFact(props) {
   const [answer, setAnswer] = useState({part1: [], related: []})
+  const [generatingAnswer, setGeneratingAnswer] = useState(true)
 
   const location = useLocation()
   let formData
@@ -33,7 +35,7 @@ function FakeFact(props) {
         processFact(fact)
       }
     } catch (error) {
-      console.log('here, right?')
+      setGeneratingAnswer(false)
       setAnswer({part1: ["Failed to generate fact. Please try again later and make sure you don't show your friend this screen!", "", ""], part2: []})
     }
   }
@@ -42,6 +44,7 @@ function FakeFact(props) {
     const splitFact = fact.split("RELATED: ")
     const answer1 = splitFact[0].split("FACT")
     const relatedQuestions = splitFact[1].split("QUESTION: ")
+    setGeneratingAnswer(false)
     setAnswer({part1: answer1, related: relatedQuestions})
   }
 
@@ -68,12 +71,13 @@ function FakeFact(props) {
             <button>Shopping</button>
             <button>Forums</button>
           </section>
-          <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12'>
-            <div className='flex items-center'>
+          <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12 relative'>
+          {generatingAnswer && <div className='absolute top-0 left-0 pulse-gradient h-12 w-full z-1'></div>}
+            <div className='flex items-center z-10'>
               <img className="w-5 h-5 mr-3" src="/ai-logo.png" alt="ai logo" />
               <p className="text-sm">AI Overview</p>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center z-10'>
               <p className="font-extralight text-sm mr-2">Learn more</p>
               <img className="w-5 h-5" src="/three-dots.svg" alt="three vertical dots" />
             </div>

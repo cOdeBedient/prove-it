@@ -1,0 +1,19 @@
+@keyframes pulseGradient {
+    0% {
+        /* opacity: .5; */
+        background-color: #facddd9d;
+    }
+    50% {
+        /* opacity: .5; */
+        background-color: #ff98bc9f;
+    }
+    100% {
+        /* opacity: .5; */
+        background-color: #fed7e494;
+    }
+  }
+  
+  .pulse-gradient {
+    animation: pulseGradient 1.5s ease-in-out infinite;
+    animation-direction: alternate;
+  }
