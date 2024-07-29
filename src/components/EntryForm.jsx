@@ -53,7 +53,7 @@ function EntryForm() {
           <div className="flex justify-center relative items-center">
             {
               inputPhase === "Phase 1" ?
-                <button onClick={(event) => {handleClick(event)}} name="submit" className="bg-gray-100 py-1 rounded mt-2 text-xs font-regular mr-4 h-8 w-28">Submit Question</button>
+                <button onClick={(event) => {handleClick(event)}} name="submit" className="bg-gray-100 py-1 rounded mt-2 text-xs font-regular mr-4 h-8 w-28">Confirm Question</button>
               :
               <Link className="text-center mr-4 h-8 mt-2 w-28" to='/result' state={{formData}}>
                 <button className="bg-gray-100 py-1 w-28 rounded text-xs font-regular h-8">Prove it!</button>
