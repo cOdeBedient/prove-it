@@ -16,7 +16,6 @@ function FakeFact(props) {
   sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
 
   const generateFact = async () => {
-    console.log("formData in here", formData)
     try {
       const data = {
         model: "gpt-3.5-turbo",
