@@ -60,15 +60,12 @@ function FakeFact(props) {
     formData && generateFact()
   }, [formData])
 
-  console.log("answer", answer)
-  console.log("formData", formData)
-
   return (
-    <Link to='/error'>
+    <Link className="w-full" to='/error'>
       <main className="w-full bg-gray-100 flex flex-col items-center">
         <div className="flex flex-col items-center h-[480px] mb-2 w-full bg-white relative">
-          <div className="relative w-11/12 h-10 mt-3">
-            <input placeholder={formData.formData.question} className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden placeholder:text-black placeholder:text-sm placeholder:font-light"></input>
+          <div className="relative w-11/12 h-11 mt-3">
+            <input placeholder={formData.formData.question} className="shadow rounded-3xl w-full h-full pl-10 overflow-hidden placeholder:text-black placeholder:text-sm placeholder:font-normal"></input>
             <div className="w-full rounded-3xl h-10 absolute left-0 top-0 bg-gradient-to-l from-25% to-35% from-white"></div>
             <img className="absolute top-3 left-3 w-5 h-5 text-gray-500 opacity-60" src="/magnifying-glass.svg" alt="search icon" />
             <img className="absolute top-1 right-12 w-8 h-10" src="/google-mic.svg" alt="microphone icon" />
