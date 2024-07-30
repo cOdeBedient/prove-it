@@ -24,12 +24,13 @@ function FakeFact(props) {
             content: trainingDetails
           },
           {
-            role: "user", content: `The question is ${formData.formData.question} and the fake fact is ${formData.formData.answer}`
+            role: "user", content: `Question: "${formData.formData.question}" Fake Fact: "${formData.formData.answer}"`
           }
         ]
       }
 
       const result = await getFact(data)
+      console.log("result", result)
       if(result) {
         const fact = result.choices[0].message.content
         processFact(fact)
@@ -41,16 +42,23 @@ function FakeFact(props) {
   }
 
   function processFact(fact) {
-    const splitFact = fact.split("RELATED: ")
-    const answer1 = splitFact[0].split("FACT")
-    const relatedQuestions = splitFact[1].split("QUESTION: ")
-    setGeneratingAnswer(false)
-    setAnswer({part1: answer1, related: relatedQuestions})
+    if(fact === "Please ask a sports-related question.") {
+      setGeneratingAnswer(false)
+      setAnswer({part1: ["Please ask a sports-related question.", "", ""], part2: []})
+    } else {
+      const splitFact = fact.split("RELATED: ")
+      const answer1 = splitFact[0].split("FACT")
+      const relatedQuestions = splitFact[1].split("QUESTION: ")
+      setGeneratingAnswer(false)
+      setAnswer({part1: answer1, related: relatedQuestions})
+    }
   }
 
   useEffect(() => {
     formData && generateFact()
   }, [formData])
+
+  console.log(answer)
 
   return (
     <Link to='/error'>
@@ -72,7 +80,7 @@ function FakeFact(props) {
             <button>Forums</button>
           </section>
           <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12 relative'>
-          {generatingAnswer && <div className='absolute top-0 left-0 pulse-gradient h-12 w-full z-1'></div>}
+          {generatingAnswer && <div className='absolute top-0 left-0 bg-gradient-to-b from-pink-300 pulse-gradient h-12 w-full z-1'></div>}
             <div className='flex items-center z-10'>
               <img className="w-5 h-5 mr-3" src="/ai-logo.png" alt="ai logo" />
               <p className="text-sm">AI Overview</p>
