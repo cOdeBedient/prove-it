@@ -6,14 +6,29 @@ import trainingDetails from "../trainingDetails"
 import {Link} from 'react-router-dom'
 import './Styles.css'
 
-function FakeFact(props) {
+let retrievedData = sessionStorage.getItem("STORED_FORM_DATA") ? JSON.parse(sessionStorage.getItem("STORED_FORM_DATA")) : null
+
+function FakeFact() {
   const [answer, setAnswer] = useState({part1: [], related: []})
   const [generatingAnswer, setGeneratingAnswer] = useState(true)
+  const [formData, setFormData ] = useState({formData: {question: "", answer: ""}})
 
   const location = useLocation()
-  let formData
-  formData = location ? location.state : JSON.parse(sessionStorage.getItem("STORED_FORM_DATA"))
-  sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
+  useEffect(() => {
+    if(!retrievedData) {
+      retrievedData = formData
+    }
+    
+    location.state ? setFormData(location.state) : setFormData(retrievedData)
+
+    if(!location.state && !retrievedData.question) {
+      setGeneratingAnswer(false)
+      setAnswer({part1: ["Start from the home screen!", "", ""], part2: []})
+    }
+
+    sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
+
+  }, [location.state])
 
   const generateFact = async () => {
     try {
@@ -31,7 +46,6 @@ function FakeFact(props) {
       }
 
       const result = await getFact(data)
-      console.log("result", result)
       if(result) {
         const fact = result.choices[0].message.content
         processFact(fact)
@@ -56,11 +70,11 @@ function FakeFact(props) {
   }
 
   useEffect(() => {
-    formData && generateFact()
-  }, [formData])
+    formData.formData.question && generateFact()
+  }, [formData.formData.question])
 
   return (
-    <Link className="w-full" to='/error'>
+    <Link className="w-screen" to='/error'>
       <main className="w-full bg-gray-100 flex flex-col items-center">
         <div className="flex flex-col items-center h-[480px] mb-2 w-full bg-white relative">
           <div className="relative w-11/12 h-11 mt-3">
