@@ -12,9 +12,11 @@ function FakeFact(props) {
 
   const location = useLocation()
   let formData
-  formData = location ? location.state : null
+  formData = location ? location.state : JSON.parse(sessionStorage.getItem("STORED_FORM_DATA"))
+  sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
 
   const generateFact = async () => {
+    console.log("formData in here", formData)
     try {
       const data = {
         model: "gpt-3.5-turbo",
@@ -58,7 +60,8 @@ function FakeFact(props) {
     formData && generateFact()
   }, [formData])
 
-  console.log(answer)
+  console.log("answer", answer)
+  console.log("formData", formData)
 
   return (
     <Link to='/error'>
