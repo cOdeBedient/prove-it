@@ -4,15 +4,19 @@ import { useLocation } from 'react-router-dom'
 import {getFact} from "../apiCalls"
 import trainingDetails from "../trainingDetails"
 import {Link} from 'react-router-dom'
+import './Styles.css'
 
 function FakeFact(props) {
   const [answer, setAnswer] = useState({part1: [], related: []})
+  const [generatingAnswer, setGeneratingAnswer] = useState(true)
 
   const location = useLocation()
   let formData
-  formData = location ? location.state : null
+  formData = location ? location.state : JSON.parse(sessionStorage.getItem("STORED_FORM_DATA"))
+  sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
 
   const generateFact = async () => {
+    console.log("formData in here", formData)
     try {
       const data = {
         model: "gpt-3.5-turbo",
@@ -22,32 +26,42 @@ function FakeFact(props) {
             content: trainingDetails
           },
           {
-            role: "user", content: `The question is ${formData.formData.question} and the fake fact is ${formData.formData.answer}`
+            role: "user", content: `Question: "${formData.formData.question}" Fake Fact: "${formData.formData.answer}"`
           }
         ]
       }
 
       const result = await getFact(data)
+      console.log("result", result)
       if(result) {
         const fact = result.choices[0].message.content
         processFact(fact)
       }
     } catch (error) {
-      console.log('here, right?')
+      setGeneratingAnswer(false)
       setAnswer({part1: ["Failed to generate fact. Please try again later and make sure you don't show your friend this screen!", "", ""], part2: []})
     }
   }
 
   function processFact(fact) {
-    const splitFact = fact.split("RELATED: ")
-    const answer1 = splitFact[0].split("FACT")
-    const relatedQuestions = splitFact[1].split("QUESTION: ")
-    setAnswer({part1: answer1, related: relatedQuestions})
+    if(fact === "Please ask a sports-related question.") {
+      setGeneratingAnswer(false)
+      setAnswer({part1: ["Please ask a sports-related question.", "", ""], part2: []})
+    } else {
+      const splitFact = fact.split("RELATED: ")
+      const answer1 = splitFact[0].split("FACT")
+      const relatedQuestions = splitFact[1].split("QUESTION: ")
+      setGeneratingAnswer(false)
+      setAnswer({part1: answer1, related: relatedQuestions})
+    }
   }
 
   useEffect(() => {
     formData && generateFact()
   }, [formData])
+
+  console.log("answer", answer)
+  console.log("formData", formData)
 
   return (
     <Link to='/error'>
@@ -68,12 +82,13 @@ function FakeFact(props) {
             <button>Shopping</button>
             <button>Forums</button>
           </section>
-          <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12'>
-            <div className='flex items-center'>
+          <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12 relative'>
+          {generatingAnswer && <div className='absolute top-0 left-0 bg-gradient-to-b from-pink-300 pulse-gradient h-12 w-full z-1'></div>}
+            <div className='flex items-center z-10'>
               <img className="w-5 h-5 mr-3" src="/ai-logo.png" alt="ai logo" />
               <p className="text-sm">AI Overview</p>
             </div>
-            <div className='flex items-center'>
+            <div className='flex items-center z-10'>
               <p className="font-extralight text-sm mr-2">Learn more</p>
               <img className="w-5 h-5" src="/three-dots.svg" alt="three vertical dots" />
             </div>

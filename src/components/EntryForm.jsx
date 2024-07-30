@@ -66,7 +66,7 @@ function EntryForm() {
               inputPhase === "Phase 2"
               &&
               <button onClick={(event) => {handleClick(event)}} name="back" className="bg-gray-100 px-1 py-1 rounded mt-2 mr-4 absolute -left-8 top-2 h-4">
-                  <img name="back" className="rotate-90 opacity-60 h-2 w-2.5 saturate-0" src="/caret-down.png" alt="down caret" />
+                  <img name="back" className="rotate-90 opacity-60 h-2 w-2.5 saturate-0" src="/caret-down.png" alt="back button" />
               </button>
             }
           </div>

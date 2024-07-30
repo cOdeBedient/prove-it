@@ -1,0 +1,16 @@
+@keyframes pulseGradient {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 0;
+    }
+  }
+  
+  .pulse-gradient {
+    animation: pulseGradient 1.5s ease-in-out infinite;
+    animation-direction: alternate;
+  }
