@@ -23,7 +23,7 @@ function FakeFact() {
 
     if(!location.state && !retrievedData.question) {
       setGeneratingAnswer(false)
-      setAnswer({part1: ["Start from the home screen!", "", ""], part2: []})
+      setAnswer({part1: ["Start from the home screen! Click anywhere.", "", ""], part2: []})
     }
 
     sessionStorage.setItem("STORED_FORM_DATA", JSON.stringify(formData))
@@ -92,7 +92,7 @@ function FakeFact() {
             <button>Shopping</button>
             <button>Forums</button>
           </section>
-          <div div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12 relative'>
+          <div className='w-full px-3 flex justify-between items-center bg-gradient-to-b from-pink-50 h-12 relative'>
           {generatingAnswer && <div className='absolute top-0 left-0 bg-gradient-to-b from-pink-300 pulse-gradient h-12 w-full z-1'></div>}
             <div className='flex items-center z-10'>
               <img className="w-5 h-5 mr-3" src="/ai-logo.png" alt="ai logo" />
@@ -136,8 +136,8 @@ function FakeFact() {
                 <img className="w-8 h-8 py-3 px-2 bg-gray-200 opacity-60 saturate-0 rounded-full" src="/caret-down.png" alt="down caret" />
               </div>
             </ul>
-        </section>
-      }
+          </section>
+        }
       </main>
     </Link>
   )

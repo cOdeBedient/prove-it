@@ -42,7 +42,7 @@ function EntryForm() {
           <div className="flex flex-col text-base w-[90%] font-medium mt-4 relative">
             {
               inputPhase === "Phase 1" ?
-              <input className="rounded-xl mb-2 font-light border pl-8 h-8 pr-[22%]" onChange={event => handleInput(event)} placeholder="Enter Question" type="text" name="question" value={formData.question}></input>
+              <input className="rounded-xl mb-2 font-light border pl-8 h-8 pr-[22%]" onChange={event => handleInput(event)} placeholder="Enter Sports-Related Question" type="text" name="question" value={formData.question}></input>
               :
               <input className="rounded-xl border mb-2 font-light pl-8 h-8 pr-[22%]" onChange={event => handleInput(event)} placeholder="Enter Desired Answer" type="text" name="answer" value={formData.answer}></input>
             }   
