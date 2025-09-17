@@ -9,8 +9,8 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<EntryForm />} />
-      <Route path='/result' element={<FakeFact />} />
       <Route path='/info' element={<Info />} />
+      <Route path='/result' element={<FakeFact />} /> 
       <Route path='/error' element={<Error />} />
       <Route path='*' element={<Error />} />
     </Routes>
